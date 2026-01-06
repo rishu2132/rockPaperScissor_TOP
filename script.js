@@ -13,15 +13,32 @@ function getComputerChoice(){
 
 }
 
-function getHumanChoice(){
-    let answer = prompt("What is your choice?");
-    return answer;
-}
+    let result = document.querySelector('#result');
+    let score = document.querySelector("#score");
+   const rockbtn = document.querySelector('#rock')
+   const paperbtn = document.querySelector('#paper')
+   const scissorbtn = document.querySelector('#scissor')
 
-function playRound(humanChoice, computerChoice){
-    humanChoice = getHumanChoice();
-    humanChoice = humanChoice.toLowerCase();
-    computerChoice = getComputerChoice();
+   rockbtn.addEventListener("click", function(){
+    console.log("rock");
+    playGame("rock");
+   })
+
+   paperbtn.addEventListener("click", function(){
+    console.log("paper");
+    playGame('paper')
+   })
+
+   scissorbtn.addEventListener("click", function(){
+    console.log("scissors");
+    playGame('scissors');
+   })
+
+
+function playRound(humanChoice){
+    
+    // humanChoice = humanChoice.toLowerCase();
+    let computerChoice = getComputerChoice();
 
     if (humanChoice === "paper"){
         if (computerChoice === "paper")
@@ -61,18 +78,24 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-function playGame(){
-    for (i=0;i<5;i++){
-        console.log(playRound());
-        console.log(`HumanScore = ${humanScore}  ComputerScore = ${computerScore} `);
+function playGame(choice){
+
+        result.textContent = `${playRound(choice)}`;
+        score.textContent = `HumanScore = ${humanScore}  ComputerScore = ${computerScore} `;
+
+    if (humanScore === 5 || computerScore === 5){
+        if (humanScore === 5){
+            alert("----You won-----");
+            humanScore=0;
+            computerScore=0;
+        }
+        else{
+            alert("----You lose-----");
+            humanScore=0;
+            computerScore=0;
+        }
     }
 
-    if (humanScore > computerScore)
-        console.log("----YOU WON-----")
-    else if (humanScore < computerScore)
-        console.log("----YOU LOSE----")
-    else 
-        console.log("---DRAW----");
+ 
 }
 
-playGame();
